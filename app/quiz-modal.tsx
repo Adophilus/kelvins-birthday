@@ -30,7 +30,7 @@ const QuizModal: FunctionComponent<{ onClose: () => void }> = ({ onClose }) => {
       <div className="flex items-center justify-center h-full p-4 sm:p-0">
         <div className="max-w-[400px] p-4 rounded-md bg-white drop-shadow-lg">
           <header>
-            <h3 className="font-semibold text-xl font-montserrat">Proof of Sammyism: Select Sammy's favourite quote in 100lvl</h3>
+            <h3 className="font-semibold text-xl font-montserrat">Proof of Sammyism: Select Sammy&apos;s favourite quote in 100lvl</h3>
           </header>
           <div className="my-4 flex flex-wrap gap-2">
             {quotes.map(quote => (
