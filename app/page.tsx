@@ -103,7 +103,7 @@ const HomePage: NextPage = () => {
         className="fixed inset-0 z-10 overflow-y-auto"
         aria-labelledby="modal-title" role="dialog" aria-modal="true"
       >
-        <QuizModal />
+        <QuizModal onClose={() => setIsShowingModal(false)} />
       </Transition>
     </>
   );
