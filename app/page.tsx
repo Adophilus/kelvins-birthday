@@ -6,6 +6,7 @@ import PresentIcon from "~/components/icons/present";
 import { sendMatic } from "./actions";
 import type { NextPage } from "next/types";
 import { Transition } from "@headlessui/react";
+import { Select, SelectContent, SelectGroup, SelectLabel, SelectTrigger, SelectValue } from "components/ui/select";
 
 const HomePage: NextPage = () => {
   const [proven, setProven] = useState(false);
@@ -105,7 +106,23 @@ const HomePage: NextPage = () => {
         <div className="fixed top-0 left-0 w-full h-full backdrop-filter backdrop-blur-lg">
           <div className="flex items-center justify-center px-4 sm:p-0">
             <div className="bg-white">
-
+              <header>
+                <h3>Select Sammy's favourite quote</h3>
+              </header>
+              <Select>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select a quote" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>I will press and press...</SelectLabel>
+                    <SelectLabel>My belle, my head o...</SelectLabel>
+                    <SelectLabel>See this my big belle</SelectLabel>
+                    <SelectLabel>... Nye nye nye, just dey emit</SelectLabel>
+                    <SelectLabel>Kami sama!!!</SelectLabel>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
