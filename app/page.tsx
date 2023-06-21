@@ -16,7 +16,7 @@ const HomePage: NextPage = () => {
 
   const onSubmit = async () => {
     const res = await sendMatic({ recipientAddress })
-    if (res.message) {
+    if (res.status) {
       toast.success(res.message)
     }
     else {
