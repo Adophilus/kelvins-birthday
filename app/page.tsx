@@ -16,10 +16,12 @@ const HomePage: NextPage = () => {
 
   const onSubmit = async () => {
     const res = await sendMatic({ recipientAddress })
-    if (res.message)
+    if (res.message) {
       toast.success(res.message)
-    else
+    }
+    else {
       toast.error(res.message)
+    }
     return false
   }
 
