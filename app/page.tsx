@@ -2,16 +2,16 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import PresentIcon from "~/components/icons/present";
+import PresentIcon from "~/icons/present";
 import { sendMatic } from "./actions";
 import type { NextPage } from "next/types";
 import { Transition } from "@headlessui/react";
-import { Select, SelectContent, SelectGroup, SelectLabel, SelectTrigger, SelectValue } from "components/ui/select";
+import QuizModal from "./quiz-modal";
 
 const HomePage: NextPage = () => {
   const [proven, setProven] = useState(false);
   const [recipientAddress, setRecipientAddress] = useState("")
-  const [isModalOpen, setIsModalOpen] = useState(true)
+  const [isShowingModal, setIsShowingModal] = useState(true)
 
   const onSubmit = async () => {
     await sendMatic({ recipientAddress })
@@ -93,7 +93,7 @@ const HomePage: NextPage = () => {
           </div>
         </div>
       </main>
-      <Transition show={isModalOpen}
+      <Transition show={isShowingModal}
         x-transitionenter="transition duration-300 ease-out"
         enter-start="translate-y-4 opacity-0 sm:translate-y-0 sm:scale-95"
         enter-end="translate-y-0 opacity-100 sm:scale-100"
@@ -103,29 +103,7 @@ const HomePage: NextPage = () => {
         className="fixed inset-0 z-10 overflow-y-auto"
         aria-labelledby="modal-title" role="dialog" aria-modal="true"
       >
-        <div className="fixed top-0 left-0 w-full h-full backdrop-filter backdrop-blur-lg">
-          <div className="flex items-center justify-center px-4 sm:p-0">
-            <div className="bg-white">
-              <header>
-                <h3>Select Sammy's favourite quote</h3>
-              </header>
-              <Select>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select a quote" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>I will press and press...</SelectLabel>
-                    <SelectLabel>My belle, my head o...</SelectLabel>
-                    <SelectLabel>See this my big belle</SelectLabel>
-                    <SelectLabel>... Nye nye nye, just dey emit</SelectLabel>
-                    <SelectLabel>Kami sama!!!</SelectLabel>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </div>
+        <QuizModal />
       </Transition>
     </>
   );
