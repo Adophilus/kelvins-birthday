@@ -7,6 +7,7 @@ import { sendMatic } from "./actions";
 import type { NextPage } from "next/types";
 import { Transition } from "@headlessui/react";
 import QuizModal from "./quiz-modal";
+import toast from "react-hot-toast";
 
 const HomePage: NextPage = () => {
   const [proven, setProven] = useState(false);
@@ -14,7 +15,11 @@ const HomePage: NextPage = () => {
   const [isShowingModal, setIsShowingModal] = useState(true)
 
   const onSubmit = async () => {
-    await sendMatic({ recipientAddress })
+    const res = await sendMatic({ recipientAddress })
+    if (res.message)
+      toast.success(res.message)
+    else
+      toast.error(res.message)
     return false
   }
 
@@ -57,12 +62,12 @@ const HomePage: NextPage = () => {
                 {!proven ? (
                   <button
                     type="button"
-                    className="w-full grow border-2 border-blue-600 bg-blue-600 p-2 font-robotoMono shadow-md font-semibold text-white duration-300 ease-in-out hover:bg-white hover:text-blue-600"
+                    className="w-full rounded-md border-2 border-blue-600 bg-blue-600 p-2 font-robotoMono shadow-md font-semibold text-white duration-300 ease-in-out hover:bg-white hover:text-blue-600"
                     onClick={() => {
                       setProven(true);
                     }}
                   >
-                    Prove yourself
+                    Claim Reward 🎁
                   </button>
                 ) : (
                   <form onSubmit={(event) => {
@@ -74,7 +79,7 @@ const HomePage: NextPage = () => {
                         placeholder="Enter polygon address..."
                         type="text"
                         name="address"
-                        onChange={setRecipientAddress}
+                        onChange={(event) => setRecipientAddress(event.target.value)}
                         value={recipientAddress}
                         className="grow border-2 border-blue-600 bg-transparent p-2 font-robotoMono font-semibold"
                         required

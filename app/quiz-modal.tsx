@@ -53,7 +53,7 @@ const QuizModal: FunctionComponent<{ onClose: () => void }> = ({ onClose }) => {
 
                   setIsLoading(false)
                   onClose()
-                }, 3000)
+                }, 2000)
               }}
               className={`border-2 border-blue-600 p-2 font-robotoMono shadow-md font-semibold transition duration-300 ease-in-out bg-blue-600 text-white ${isLoading ? 'flex w-auto h-auto rounded-full mx-auto' : 'flex w-full justify-center rounded-md hover:bg-white hover:text-blue-600'}`}
             >
