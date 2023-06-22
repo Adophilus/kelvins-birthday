@@ -21,8 +21,9 @@ export const env = createEnv({
       process.env.VERCEL ? z.string().min(1) : z.string().url(),
     ),
     // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
-    POLYGON_RPC_URL: z.string().url(),
-    WALLET_PRIVATE_KEY: z.string()
+    POLYGON_MAINNET_RPC_URL: z.string().url(),
+    POLYGON_TESTNET_RPC_URL: z.string().url(),
+    POLYGON_WALLET_PRIVATE_KEY: z.string()
   },
 
   /**
@@ -43,8 +44,9 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    POLYGON_RPC_URL: process.env.POLYGON_RPC_URL,
-    WALLET_PRIVATE_KEY: process.env.WALLET_PRIVATE_KEY
+    POLYGON_MAINNET_RPC_URL: process.env.POLYGON_MAINNET_RPC_URL,
+    POLYGON_TESTNET_RPC_URL: process.env.POLYGON_TESTNET_RPC_URL,
+    POLYGON_WALLET_PRIVATE_KEY: process.env.POLYGON_WALLET_PRIVATE_KEY
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
