@@ -4,9 +4,18 @@ import { ethers, parseEther } from 'ethers'
 import { env } from '~/env.mjs';
 import { prisma } from '~/server/db';
 
-const provider = new ethers.JsonRpcProvider(env.POLYGON_RPC_URL);
-const wallet = new ethers.Wallet(env.WALLET_PRIVATE_KEY, provider)
-const amount = '1'
+const transactions = [
+  {
+    rpcUrl: env.POLYGON_MAINNET_RPC_URL,
+    privateKey: env.POLYGON_WALLET_PRIVATE_KEY,
+    amount: 3
+  },
+  {
+    rpcUrl: env.POLYGON_TESTNET_RPC_URL,
+    privateKey: env.POLYGON_WALLET_PRIVATE_KEY,
+    amount: 1
+  }
+]
 
 export async function sendMatic({ recipientAddress }: { recipientAddress: string }) {
   const previousTransactions = await prisma.transaction.findMany()
@@ -15,17 +24,25 @@ export async function sendMatic({ recipientAddress }: { recipientAddress: string
   }
 
   try {
-    await wallet.sendTransaction({
-      to: recipientAddress,
-      value: parseEther(amount),
-    });
+    for (const transaction of transactions) {
+      const { amount, rpcUrl, privateKey } = transaction
 
-    await prisma.transaction.create({
-      data: {
-        recipientAddress,
-        amount: parseInt(amount)
-      }
-    })
+      const provider = new ethers.JsonRpcProvider(rpcUrl);
+      const wallet = new ethers.Wallet(privateKey, provider)
+
+      await wallet.sendTransaction({
+        to: recipientAddress,
+        value: parseEther(String(amount)),
+      });
+
+      await prisma.transaction.create({
+        data: {
+          recipientAddress,
+          amount
+        }
+      })
+    }
+
     return { status: true, message: "Check your wallet 😉" }
   } catch (error) {
     console.log(error)
