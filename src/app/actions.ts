@@ -6,11 +6,13 @@ import { prisma } from '~/server/db';
 
 const transactions = [
   {
+    name: "mainnet",
     rpcUrl: env.POLYGON_MAINNET_RPC_URL,
     privateKey: env.POLYGON_WALLET_PRIVATE_KEY,
     amount: 3
   },
   {
+    name: "testnet",
     rpcUrl: env.POLYGON_TESTNET_RPC_URL,
     privateKey: env.POLYGON_WALLET_PRIVATE_KEY,
     amount: 1
@@ -18,22 +20,31 @@ const transactions = [
 ]
 
 export async function sendMatic({ recipientAddress }: { recipientAddress: string }) {
+  console.log("Initiating transaction")
+
   const previousTransactions = await prisma.transaction.findMany()
   if (previousTransactions.length !== 0) {
+    console.log("Found previous transactions, quitting...")
     return { status: false, message: "Transfer already in progress" }
   }
 
   try {
     for (const transaction of transactions) {
-      const { amount, rpcUrl, privateKey } = transaction
+      const { name, amount, rpcUrl, privateKey } = transaction
 
       const provider = new ethers.JsonRpcProvider(rpcUrl);
       const wallet = new ethers.Wallet(privateKey, provider)
+
+      console.log(`[${name}] Sending ${amount} MATIC to ${recipientAddress}...`)
 
       await wallet.sendTransaction({
         to: recipientAddress,
         value: parseEther(String(amount)),
       });
+
+      console.log(`[${name}] Sent ${amount} MATIC to ${recipientAddress}.`)
+
+      console.log(`[DB][${name}][${amount}][${recipientAddress}] Adding tx to db`)
 
       await prisma.transaction.create({
         data: {
@@ -41,6 +52,8 @@ export async function sendMatic({ recipientAddress }: { recipientAddress: string
           amount
         }
       })
+
+      console.log(`[DB][${name}][${amount}][${recipientAddress}] Added tx to db`)
     }
 
     return { status: true, message: "Check your wallet 😉" }
