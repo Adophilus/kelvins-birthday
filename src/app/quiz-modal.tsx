@@ -6,19 +6,18 @@ import type { FunctionComponent } from "react"
 import { useState } from "react"
 
 const quotes = [
-  'My belle, my head o...',
-  'See this my big belle',
-  'Kami sama!!!',
-  '... Nye nye nye, just dey emit',
-  'I will press and press...',
-  'See this fine girl',
-  'E be like say I go just drop out',
-  'Ah Nissi!',
-  'Austin get plenty money o',
-  'FUTO wan kee me!',
-  'Nah to learn farm work now'
+  'E be like say na to bomb',
+  'See dis fine girl',
+  'Thats cool 😎',
+  'PHP dey mad o ',
+  'I don leave school for una 🚶🚶',
+  'Omo ehn!',
+  'Sir Bobby 🙌',
+  'Head wan blow 🤯🤯',
+  'My boss',
+  'Na to learn farm work now ..'
 ]
-const correctQuote = quotes[4]
+const correctQuote = quotes[5]
 
 const QuizModal: FunctionComponent<{ onClose: () => void }> = ({ onClose }) => {
   const router = useRouter()
@@ -30,7 +29,7 @@ const QuizModal: FunctionComponent<{ onClose: () => void }> = ({ onClose }) => {
       <div className="flex items-center justify-center h-full p-4 sm:p-0">
         <div className="max-w-[400px] p-4 rounded-md bg-white drop-shadow-lg">
           <header>
-            <h3 className="font-semibold text-xl font-montserrat">Proof of Sammyism: Select Sammy&apos;s favourite quote in 100lvl</h3>
+            <h3 className="font-semibold text-xl font-montserrat">Proof of Kelvinism: Select Kelvin&apos;s favourite quote</h3>
           </header>
           <div className="my-4 flex flex-wrap gap-2">
             {quotes.map(quote => (

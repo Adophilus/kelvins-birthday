@@ -45,7 +45,7 @@ const HomePage: NextPage = () => {
             <div>
               <div className="text-center">
                 <span className="font-notoSans font-semibold leading-loose text-red-800">
-                  21 June, 2023
+                  27<sup>th</sup> September, 2023
                 </span>
               </div>
               <header className="my-4">
