@@ -30,15 +30,12 @@ const HomePage: NextPage = () => {
       <main className="flex min-h-screen items-center justify-center bg-yellow-100 py-12">
         <div className="divide-y-blue-600 max-w-[450px] divide-y border-2 border-blue-600 shadow-lg">
           <div className="h-40 w-full bg-yellow-400/80 shadow-md">
-            <div className="relative mx-auto flex h-40 w-40 translate-y-1/2 items-center justify-center rounded-full bg-blue-600 shadow-md">
-              <Image
-                src="/birthday-cake.svg"
-                height={100}
-                width={100}
-                alt="cake"
-                className="h-32 w-32 drop-shadow-lg"
-              />
-            </div>
+            <Image className="relative mx-auto flex h-40 w-40 translate-y-1/2 rounded-full drop-shadow-lg object-cover"
+              src="/kelvin.jpg"
+              height={1000}
+              width={1000}
+              alt="cake"
+            />
           </div>
           <div className="p-4">
             <div className="h-24" />
